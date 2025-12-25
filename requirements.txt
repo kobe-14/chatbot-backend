@@ -1,0 +1,9 @@
+dotenv
+PyPDF2
+agno
+anthropic
+openai
+mcp
+fastapi[standard]
+sqlalchemy
+requests

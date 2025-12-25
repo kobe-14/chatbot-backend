@@ -1,0 +1,31 @@
+version: '3.8'
+
+# Development configuration with bind mounts for easier debugging
+
+services:
+  chatbot:
+    build: .
+    container_name: harish-chatbot-dev
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
+    volumes:
+      # Bind mount for development (easier to inspect database)
+      - ./agno.db:/app/agno.db
+      - ./agents.py:/app/agents.py  # Hot reload for code changes
+    networks:
+      - chatbot-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  chatbot-network:
+    driver: bridge
