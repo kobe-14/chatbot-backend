@@ -1,8 +1,6 @@
-version: "3.8"
-
 services:
   chatbot:
-    build: .
+    image: harishg14dev/chatbot-backend:latest
     container_name: harish-chatbot
     ports:
       - "8000:8000"
