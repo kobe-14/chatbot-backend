@@ -46,6 +46,8 @@ services:
       sh -c "certbot certonly --webroot --webroot-path=/var/lib/letsencrypt
       --email your@email.com --agree-tos --no-eff-email
       -d chat-bot-backend.harish14.dev"
+    networks:
+      - chatbot-network
 
 volumes:
   chatbot-data:
